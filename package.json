@@ -1,0 +1,19 @@
+{
+  "name": "typescript-complete-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "systemjs": "^0.19.41"
+  },
+  "devDependencies": {
+    "jspm": "^0.16.47",
+    "lite-server": "^2.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "author": "",
+  "license": "ISC"
+}
