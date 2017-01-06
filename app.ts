@@ -10,17 +10,21 @@
         desc:string;
     }
 
+    interface ITeamProperty
+    {
+        img:string;
+        status:number;
+    }
+
     interface ITeamMember extends IObject
     {
         ppt:IMemberProperty;
     }
 
-    // interface ITeam extends IObject
-    // {
-    //     //id:number;
-    //     //name: string;
-    //     MemberList?: ITeamMember[];
-    // }
+    interface ITeam extends IObject
+    {
+        ppt:ITeamProperty;
+    }
 
     /////////////////////////////
     abstract class CObject implements IObject
@@ -40,10 +44,13 @@
     }
 
 
-    class CTeam
+    class CTeam implements ITeam
     {
         private MemberList: ITeamMember[] = [];
-        constructor(  public id:number,  public name: string )
+        constructor(  
+            public id:number,  
+            public name: string,
+            public ppt:ITeamProperty )
         {
         }
 
@@ -64,9 +71,9 @@
     {
         private TeamList :CTeam[] = [];
 
-        public CreateTeam( id:number, name: string)
+        public CreateTeam( id:number, name: string, ppt:ITeamProperty)
         {
-            let team = new CTeam( id, name);
+            let team = new CTeam( id, name, ppt);
             this.TeamList.push(team);
             return(team);
         }
@@ -89,13 +96,16 @@
             // Add a set of Team to the model
             for (var id_team = 1; id_team <= max_team; id_team++) 
             {
-                let team = game.CreateTeam ( id_team,`Team-${id_team}`);
+                let team = game.CreateTeam ( 
+                    id_team,
+                    `Team-${id_team} Name`,
+                    { img:`Team-${id_team} Logo`, status:2} );
 
                 // Add a set of members to the Team
                 for (var id_member = 1; id_member <= max_members; id_member++)
                 {
-                    let member = new CTeamMember(  id_member, `Member-${id_member}`,
-                        { img: `img-${id_member}`, desc: `desc-${id_member}`} );
+                    let member = new CTeamMember(  id_member, `Player-${id_member} Name`,
+                        { img: `Player-${id_member} Image`, desc: `Player-${id_member} Description`} );
 
                     team.AddMember(member);
                 }
