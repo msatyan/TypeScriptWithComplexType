@@ -1,30 +1,5 @@
-    interface IObject
-    {
-        id: number;
-        name: string;
-    }
-
-    interface IMemberProperty
-    {
-        img:string;
-        desc:string;
-    }
-
-    interface ITeamProperty
-    {
-        img:string;
-        status:number;
-    }
-
-    interface ITeamMember extends IObject
-    {
-        ppt:IMemberProperty;
-    }
-
-    interface ITeam extends IObject
-    {
-        ppt:ITeamProperty;
-    }
+import {IObject, IMember, IMemberProperty, 
+    ITeam, ITeamProperty} from "./MyModel";
 
     /////////////////////////////
     abstract class CObject implements IObject
@@ -34,7 +9,7 @@
         }
     }
 
-    class CTeamMember extends CObject implements ITeamMember
+    class CMember extends CObject implements IMember
     {
         constructor( id: number, name: string,
                      public ppt: IMemberProperty)
@@ -46,7 +21,7 @@
 
     class CTeam implements ITeam
     {
-        private MemberList: ITeamMember[] = [];
+        private MemberList: IMember[] = [];
         constructor(  
             public id:number,  
             public name: string,
@@ -60,7 +35,7 @@
             return(this.MemberList);
         }
 
-        public AddMember( team: CTeamMember): void
+        public AddMember( team: CMember): void
         {
             this.MemberList.push(team);
         }
@@ -104,7 +79,7 @@
                 // Add a set of members to the Team
                 for (var id_member = 1; id_member <= max_members; id_member++)
                 {
-                    let member = new CTeamMember(  id_member, `Player-${id_member} Name`,
+                    let member = new CMember(  id_member, `Player-${id_member} Name`,
                         { img: `Player-${id_member} Image`, desc: `Player-${id_member} Description`} );
 
                     team.AddMember(member);
