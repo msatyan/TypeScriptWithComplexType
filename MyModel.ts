@@ -29,7 +29,7 @@
 
     export interface IGame
     {
-         TeamList:ITeam[];
+         teams:ITeam[];
     }
 
 

@@ -1,5 +1,5 @@
 import {IObject, IMember, IMemberProperty, 
-    ITeam, ITeamProperty} from "./MyModel";
+    ITeam, ITeamProperty, IGame} from "./MyModel";
 
     /////////////////////////////
     abstract class CObject implements IObject
@@ -11,8 +11,7 @@ import {IObject, IMember, IMemberProperty,
 
     class CMember extends CObject implements IMember
     {
-        constructor( id: number, name: string,
-                     public ppt: IMemberProperty)
+        constructor( id: number, name: string, public ppt: IMemberProperty)
         {
             super(id, name);
         }
@@ -41,11 +40,10 @@ import {IObject, IMember, IMemberProperty,
         }
     }
 
-    //////////////////////////////////
+    ////////////////////////
     class CModelGame
     {
-        private TeamList :CTeam[] = [];
-
+        private TeamList :ITeam[] = [];
         public CreateTeam( id:number, name: string, ppt:ITeamProperty)
         {
             let team = new CTeam( id, name, ppt);
@@ -53,12 +51,13 @@ import {IObject, IMember, IMemberProperty,
             return(team);
         }
 
-        public GetJson()
+        public GetJson():ITeam[]
         {
             return(this.TeamList);
         }
     }
 
+    /////////////////////////////////////
     class TestGame
     {
         public static PlayGame():any
